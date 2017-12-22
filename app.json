@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/alarm/alarm",
+    "pages/record/record",
+    "pages/more/more",
+    "pages/alarm/addalarm/addalarm",
+    "pages/more/familyrecord/familyrecord",
+    "pages/alarm/medicineInfo/medicineInfo"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "小药盒",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#858585",
+    "selectedColor": "#39b5de",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/alarm/alarm",
+        "iconPath": "images/tabbar/icon_tabbar_alarm_nor.png",
+        "selectedIconPath": "images/tabbar/icon_tabbar_alarm_sel.png",
+        "text": "服药提醒"
+      },
+      {
+        "pagePath": "pages/record/record",
+        "iconPath": "images/tabbar/icon_tabbar_record_nor.png",
+        "selectedIconPath": "images/tabbar/icon_tabbar_record_sel.png",
+        "text": "服药记录"
+      },
+      {
+        "pagePath": "pages/more/more",
+        "iconPath": "images/tabbar/icon_tabbar_more_nor.png",
+        "selectedIconPath": "images/tabbar/icon_tabbar_more_sel.png",
+        "text": "更多"
+      }
+    ]
+  },
+  "debug": true
+}

@@ -1,0 +1,35 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": false,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.5.3",
+	"appid": "wx8723c746ba822cd7",
+	"projectname": "%E6%99%BA%E5%8C%BB%E8%8D%AF%E7%9B%92",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "addalarm",
+					"pathName": "pages/alarm/addalarm/addalarm",
+					"query": ""
+				}
+			]
+		}
+	}
+}

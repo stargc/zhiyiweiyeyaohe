@@ -1,0 +1,65 @@
+<!--pages/more/more.wxml-->
+<view class="container">
+ <view class="card userinfo">
+      <block wx:if="{{hasUserInfo}}">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+
+  <view class="card">
+    <view class="item {{hasBox ? 'hideView' : 'showView'}}" bindtap="clickAddMedicine" >
+      <image class="icon" src="../../images/more/more_icon_memoboxadd.png"></image>
+      <text class="name">添加我的小药盒</text>
+      <image class="arrow" src="../../images/recard/ic_toolbar_advance.png"></image>
+    </view>
+
+    <view class="item {{!hasBox ? 'hideView' : 'showView'}}">
+      <image class="icon" src="../../images/more/more_icon_memobox.png"></image>
+      <text class="name">{{boxname}}</text>
+      <image class="arrow" src="../../images/recard/ic_toolbar_advance.png"></image>
+    </view>
+  </view>
+
+  <view class="card">
+
+    <view class="item" bindtap="clickFamilyRecord">
+      <image class="icon" src="../../images/more/more_icon_family.png"></image>
+      <text class="name">家人的记录</text>
+      <image class="arrow" src="../../images/recard/ic_toolbar_advance.png"></image>
+    </view>
+    <view class="line1"></view>
+    <view class="item" bindtap="clickbuyMedicine">
+      <image class="icon" src="../../images/more/more_icon_labs.png"></image>
+      <text class="name">买药提醒</text>
+      <image class="arrow" src="../../images/recard/ic_toolbar_advance.png"></image>
+    </view>
+    <view class="line1"></view>
+    <view class="item" bindtap="clickhelp">
+      <image class="icon" src="../../images/more/more_icon_help.png"></image>
+      <text class="name">紧急救助</text>
+      <image class="arrow" src="../../images/recard/ic_toolbar_advance.png"></image>
+    </view>
+    <view class="line1"></view>
+    <view class="item" bindtap="clickSendMedicine">
+      <image class="icon" src="../../images/more/icon_tabbar_record_sel.png"></image>
+      <text class="name">紧急送药</text>
+      <image class="arrow" src="../../images/recard/ic_toolbar_advance.png"></image>
+    </view>
+    <view class="line1"></view>
+    <view class="item" bindtap="clickNearbyClinic">
+      <image class="icon" src="../../images/more/icon_add_friend.png"></image>
+      <text class="name">附近诊所</text>
+      <image class="arrow" src="../../images/recard/ic_toolbar_advance.png"></image>
+    </view>
+  </view>
+
+  <view class="card">
+
+    <view class="item" bindtap="clickSetting">
+      <image class="icon" src="../../images/more/more_icon_setting.png"></image>
+      <text class="name">设置</text>
+      <image class="arrow" src="../../images/recard/ic_toolbar_advance.png"></image>
+    </view>
+  </view>
+</view>

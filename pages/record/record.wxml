@@ -1,0 +1,93 @@
+<!--pages/record/record.wxml-->
+<view class="container">
+
+  <block wx:for="{{recordData}}">
+    <view class="card">
+      <text class="date">{{item.alarmDate}}</text>
+      <view class="line"></view>
+      <view class="info">
+        <view class="med">
+          <image class="done" src="../../images/recard/btn_check_on_emui.png"></image>
+          <text class="time">{{item.alarmTime}}</text>
+          <view class="names">
+            <text class="name">{{item.medName}}</text>
+          </view>
+          <image class="more" src="../../images/recard/ic_toolbar_advance.png"></image>
+        </view>
+      </view>
+    </view>
+  </block>
+  <!-- 
+  <view class="card">
+    <text class="date">昨天</text>
+    <view class="line"></view>
+    <view class="info">
+      <view class="med">
+        <image class="done" src="../../images/recard/btn_check_on_emui.png"></image>
+        <text class="time">19:30</text>
+        <view class="names">
+          <text class="name">辛伐他丁</text>
+        </view>
+        <image class="more" src="../../images/recard/ic_toolbar_advance.png"></image>
+      </view>
+
+      <view class="line1"></view>
+      <view class="med">
+        <image class="done" src="../../images/recard/btn_check_on_emui.png"></image>
+        <text class="time">13:00</text>
+        <view class="names">
+          <text class="name">维他命C</text>
+          <text class="name">益生菌</text>
+        </view>
+        <image class="more" src="../../images/recard/ic_toolbar_advance.png"></image>
+      </view>
+
+      <view class="line1"></view>
+      <view class="med">
+        <image class="done" src="../../images/recard/btn_check_on_emui.png"></image>
+        <text class="time">08:25</text>
+        <view class="names">
+          <text class="name">鱼肝油</text>
+        </view>
+        <image class="more" src="../../images/recard/ic_toolbar_advance.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="date">9月20日</text>
+    <view class="line"></view>
+    <view class="info">
+      <view class="med">
+        <image class="done" src="../../images/recard/btn_check_on_emui.png"></image>
+        <text class="time">19:30</text>
+        <view class="names">
+          <text class="name">辛伐他丁</text>
+        </view>
+        <image class="more" src="../../images/recard/ic_toolbar_advance.png"></image>
+      </view>
+
+      <view class="line1"></view>
+      <view class="med">
+        <image class="done" src="../../images/recard/btn_check_on_emui.png"></image>
+        <text class="time">13:00</text>
+        <view class="names">
+          <text class="name">维他命C</text>
+          <text class="name">益生菌</text>
+        </view>
+        <image class="more" src="../../images/recard/ic_toolbar_advance.png"></image>
+      </view>
+
+      <view class="line1"></view>
+      <view class="med">
+        <image class="done" src="../../images/recard/btn_check_on_emui.png"></image>
+        <text class="time">08:25</text>
+        <view class="names">
+          <text class="name">鱼肝油</text>
+        </view>
+        <image class="more" src="../../images/recard/ic_toolbar_advance.png"></image>
+      </view>
+    </view>
+  </view>
+  -->
+</view>

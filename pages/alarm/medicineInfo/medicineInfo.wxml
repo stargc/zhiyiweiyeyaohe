@@ -1,0 +1,28 @@
+<!--pages/alarm/medicineInfo/medicineInfo.wxml-->
+<view class="container">
+  <view class="card" style="margin-top:0;">
+  <text>药品信息</text>
+    <view class="line1"></view>
+     <view class="info">
+      <text class="key">药品名称</text>
+      <text class="value">鱼肝油</text>
+    </view>
+    <view class="line1"></view>
+     <view class="info">
+      <text class="key">每次服用量</text>
+      <text class="value">鱼肝油</text>
+    </view>
+    <view class="line1"></view>
+     <view class="info">
+      <text class="key">使用病状</text>
+      <text class="value">维生素AD缺乏</text>
+    </view>
+    <view class="line1"></view>
+    <view class="info">
+      <text class="med-name">详细信息</text>
+      <image class="med-img" src="../../../images/alarm/medicine.png"></image>
+    </view>
+  </view>
+    <button class="done" bindtap='save'>已服药</button>
+    <button class="goon" bindtap='save'>跳过</button>
+</view>

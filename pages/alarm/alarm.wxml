@@ -1,0 +1,33 @@
+<!--alarm.wxml-->
+<view class="container">
+  <!-- <view class="top-bar">
+    <text class="edit">编辑</text>
+    <text class="title">服药提醒</text>
+    <image class="image-add" src="../../images/alarm/button_nav_add.png"></image>
+  </view>
+  -->
+  <view class="add-view">
+    <image class="add-alarm" bindtap="gotoAddAlarm" src="../../images/alarm/button_nav_add.png"></image>
+    <image class="add-box" bindtap="gotoAddBox" src="../../images/alarm/alarm_add_memobox.png"></image>
+  </view>
+  <view class="content">
+    <view class="next">
+      <text class="tx-next">下一个</text>
+      <image class="img-next" src="../../images/alarm/alarm_next.png"></image>
+    </view>
+    <block wx:for="{{alarms}}">
+      <view class="card" style="margin-top:0;" bindtap='gotoMedicine'>
+        <view class="dv-time">
+          <text class="time">{{item.alarmTime}}</text>
+          <text class="fre">每天</text>
+        </view>
+        <view class="line"></view>
+        <view class="info">
+          <image class="med-img" src="{{server_path}}alarm/getImage?url={{item.url}}"></image>
+          <text class="med-name">{{item.medName}}</text>
+          <text class="med-fre">x{{item.instruction}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

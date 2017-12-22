@@ -1,0 +1,60 @@
+/* pages/record/record.wxss */
+.card text {
+  color: gray;
+}
+.card {
+  text-align: center;
+  margin:5% auto;
+  padding:2%;
+  width: 90%;
+  background-color: white;
+  border-radius: 5px;
+}
+.card .line {
+  width:90%;
+  height:1px;
+  background-color: #BFBFBF;
+  margin: 0px 5% 10px 5%;
+  overflow: hidden;
+}
+.card .line1 {
+  width:90%;
+  height:1px;
+  background-color: #D6D6D6;
+  margin: 5px 5% 10px 5%;
+}
+.date {
+  float: right;
+  margin-right: 5%;
+  margin-bottom: 10px;
+}
+.med {
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.done {
+  width: 40px;
+  height:40px;
+  float: left;
+}
+.time {
+  line-height: 50px;
+  float: left;
+  margin-left:1%;
+}
+.names {
+  display: inline-block;
+  overflow: hidden;
+  
+}
+.name {
+  display: block;
+}
+.more {
+  width: 40px;
+  height:40px;
+  float: right;
+}

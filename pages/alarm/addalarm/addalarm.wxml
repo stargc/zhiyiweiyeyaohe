@@ -1,0 +1,38 @@
+<!--logs.wxml-->
+<view class="container">
+  <view class="card">
+  <picker class="pic_time" mode="date" value="YYYY-MM-DD" bindchange="bindStartDateChange">
+      <text class="tx_time">开始日期: {{alarmStartDate}}</text>
+    </picker>
+    <picker class="pic_time" mode="date" value="YYYY-MM-DD" bindchange="bindEndDateChange">
+      <text class="tx_time">结束日期: {{alarmEndDate}}</text>
+    </picker>
+    <picker class="pic_time" mode="time" value="hh:mm"  start="00:00" end="23:59"  bindchange="bindTimeChange">
+      <text class="tx_time">每日提醒时间: {{alarmtime}}</text>
+    </picker>
+  </view>
+  <view class="card">
+    <view class="medicine">
+      <text class="title">药品信息</text>
+      <view class="line1"></view>
+      <block wx:for="{{medicine_items}}">
+        <view class="info">
+          <view class="infos">
+            <image class="add-info" src='{{info_image}}' bindtap='addinfo'></image>
+            <image class="add-info" src='../../../images/alarm/alarm_extra_info.png' bindtap='addinfo'></image>
+          </view>
+          <view class="content">
+            <input class="name" placeholder="药（默认药品名称）"></input>
+            <view class="line2"></view>
+            <picker class="pic_num" mode="selector" value="{{num_index}}" range="{{num_array}}" bindchange="bindNumberChange">
+              <text class="tx_num">{{num_array[num_index]}}</text>
+            </picker>
+          </view>
+          <image class="delete" src='../../../images/alarm/button_red_delete.png'></image>
+        </view>
+      </block>
+    </view>
+    <button class="add-med" bindtap='addMedicine'>添加一种新药品</button>
+  </view>
+  <button class="save" bindtap='save'>保存</button>
+</view>
