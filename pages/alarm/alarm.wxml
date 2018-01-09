@@ -7,7 +7,7 @@
   </view>
   -->
   <view class="add-view">
-    <image class="add-alarm" bindtap="gotoAddAlarm" src="../../images/alarm/button_nav_add.png"></image>
+    <image class="add-alarm" bindtap="gotoAddAlarm" data-alarmId="1" src="../../images/alarm/button_nav_add.png"></image>
     <image class="add-box" bindtap="gotoAddBox" src="../../images/alarm/alarm_add_memobox.png"></image>
   </view>
   <view class="content">
@@ -16,13 +16,14 @@
       <image class="img-next" src="../../images/alarm/alarm_next.png"></image>
     </view>
     <block wx:for="{{alarms}}">
-      <view class="card" style="margin-top:0;" bindtap='gotoMedicine'>
+      <view class="card" style="margin-top:0;" bindtap='gotoMedicine' data-testId="1">
         <view class="dv-time">
-          <text class="time">{{item.alarmTime}}</text>
-          <text class="fre">每天</text>
+          <text class="time">{{item.alarmTime_show}}</text>
+          <text class="fre">{{item.alarmDate_show}}</text>
         </view>
         <view class="line"></view>
         <view class="info">
+          <!--  <image class="med-img-bg" src='../../images/alarm/alarm_extra_info.png'></image> -->
           <image class="med-img" src="{{server_path}}alarm/getImage?url={{item.url}}"></image>
           <text class="med-name">{{item.medName}}</text>
           <text class="med-fre">x{{item.instruction}}</text>

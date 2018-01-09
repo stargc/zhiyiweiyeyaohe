@@ -2,7 +2,7 @@
 var jsonUtil = require('../../utils/jsonutil.js');
 //获取应用实例
 const app = getApp();
-var server_path = "http://localhost:8080/MedicineBox/";
+var server_path = "http://localhost:8080/zhiyiweiye1/";
 
 Page({
   data: {
@@ -12,9 +12,10 @@ Page({
     hasUserInfo: false,
     alarms: ""
   },
-  gotoAddAlarm: function () {
+  gotoAddAlarm: function (event) {
+    console.info(event.target.dataset.alarmID);
     wx.navigateTo({
-      url: 'addalarm/addalarm'
+      url: "addalarm/addalarm"
     })
   },
   gotoAddBox: function () {
@@ -40,15 +41,38 @@ Page({
       }
     })
   },
+  hideLoadingToast: function () {
+    var _this = this;
+    if (app.globalData.userInfo && app.globalData.user) {
+      _this.getAlarm();
+      wx.hideLoading();
+    } else {
+      setTimeout(function () {
+        _this.hideLoadingToast();
+      }, 1000);
+    }
+    
+  },
   onLoad: function () {
     var _this = this;
     console.info("alarm onload");
+
+    wx.showLoading({
+      title: '加载中',
+      mask: true,
+    });
+
+    setTimeout(function(){
+      _this.hideLoadingToast();
+    },3000);
+
+
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-      this.getAlarm();
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -58,6 +82,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+        app.globalData.userInfo = res.userInfo;
         _this.storeUserInfo(res);
       }
     } else {
@@ -69,15 +94,17 @@ Page({
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
-          })
+          });
+          app.globalData.userInfo = res.userInfo;
           _this.storeUserInfo(res);
         }
       })
     }
   },
-  gotoMedicine: function () {
+  gotoMedicine: function (event) {
+    console.info(event.target.dataset.alarmID);
     wx.navigateTo({
-      url: 'medicineInfo/medicineInfo',
+      url: 'medicineInfo/medicineInfo?alarmId=' +event.target.dataset.alarmid,
     })
   },
   storeUserInfo: function (res) {
@@ -102,7 +129,7 @@ Page({
             key: "user",
             data: userData
           });
-          _this.getAlarm();
+          app.globalData.user = userData[0];
         }
       },
       fail: function (failData) {
@@ -113,29 +140,20 @@ Page({
   getAlarm: function () {
     var _this = this;
     console.info("alarm getAlarm");
-    wx.getStorage({
-      key: 'user',
-      success: function (res) {
-        console.info("alarm getStorage user:userID = " + res.data[0].userId);
-        wx.request({
-          url: server_path + "viewalarm/findAlarmByUserAndDate.do",
-          data: {
-            userId: res.data[0].userId
-          },
-          header: {
-            'content-type': 'application/json' // 默认值
-          },
-          success: function (res) {
-            console.info("alarm getalarm data===============");
-            _this.setData({
-              alarms: jsonUtil.stringToJson(res.data).data
-            });
-          }
-        })
+    wx.request({
+      url: server_path + "viewalarm/findAlarmByUserAndDate.do",
+      data: {
+        userId: app.globalData.user.userId
       },
-      fail: function (res) {
-        _this.storeUserInfo();
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.info("alarm getalarm data===============");
+        _this.setData({
+          alarms: jsonUtil.stringToJson(res.data).data
+        });
       }
-    });
+    })
   }
 })

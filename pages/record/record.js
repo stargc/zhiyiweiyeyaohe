@@ -1,6 +1,7 @@
 // pages/record/record.js
+const app = getApp();
 var jsonUtil = require('../../utils/jsonutil.js');
-var server_path = "http://localhost:8080/MedicineBox/";
+var server_path = "http://localhost:8080/zhiyiweiye1/";
 Page({
 
   /**
@@ -15,13 +16,10 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    wx.getStorage({
-      key: 'user',
-      success: function (res) {
         wx.request({
           url: server_path + "viewrecord/findAlarmByUser.do",
           data: {
-            userId: res.data[0].userId
+            userId: app.globalData.user.userId
           },
           header: {
             'content-type': 'application/json' // 默认值
@@ -31,12 +29,7 @@ Page({
               recordData: jsonUtil.stringToJson(res.data).data
             });
           }
-        })
-      },
-      fail: function(res) {
-
-      }
-    })  
+        }) 
   },
 
   /**

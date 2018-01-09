@@ -93,6 +93,10 @@
   height:80px;
   width:80px;
 }
+.card .med-img-bg {
+  height:80px;
+  width:80px;
+}
 .card .med-name {
   line-height: 80px;
 }

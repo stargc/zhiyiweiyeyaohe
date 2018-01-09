@@ -3,12 +3,12 @@
 
   <block wx:for="{{recordData}}">
     <view class="card">
-      <text class="date">{{item.alarmDate}}</text>
+      <text class="date">{{item.alarmDate_show}}</text>
       <view class="line"></view>
       <view class="info">
         <view class="med">
           <image class="done" src="../../images/recard/btn_check_on_emui.png"></image>
-          <text class="time">{{item.alarmTime}}</text>
+          <text class="time">{{item.alarmTime_show}}</text>
           <view class="names">
             <text class="name">{{item.medName}}</text>
           </view>

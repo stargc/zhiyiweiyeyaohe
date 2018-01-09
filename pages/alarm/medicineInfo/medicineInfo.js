@@ -1,4 +1,9 @@
 // pages/alarm/medicineInfo/medicineInfo.js
+var dateUtil = require('../../../utils/dateutil.js');
+var jsonUtil = require('../../../utils/jsonutil.js');
+
+const app = getApp();
+var server_path = "http://localhost:8080/zhiyiweiye1/";
 Page({
 
   /**
@@ -11,8 +16,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad: function (e) {
+    console.info(e.alarmId);
   },
 
   /**
@@ -74,4 +79,49 @@ Page({
       }
     }
   },
+  done: function(e) {
+    console.info("formID：" + e.detail.formId);
+    this.sendMsg(e.detail.formId);
+  },
+  skip: function(e) {
+
+  },
+  sendMsg: function (formid) {
+    wx.request({
+      url: 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + app.globalData.access_token,
+      data: {
+        touser: app.globalData.openId,
+        template_id: "5wt1qqFKII37l1M2CmEglaeN9YYXxg6dsjHKMFMnEwQ",
+        page: "medicineInfo",
+        form_id: 1515142220615,
+        data: {
+          "keyword1": {
+            "value": "339208499",
+            "color": "#173177"
+          },
+          "keyword2": {
+            "value": "2015年01月05日 12:30",
+            "color": "#173177"
+          },
+          "keyword3": {
+            "value": "粤海喜来登酒店",
+            "color": "#173177"
+          }
+        }
+      },
+      method: 'POST',
+      header: { 'content-type': 'application/json' },
+      success: function (data) {
+        if (data.data.errcode != 0) {
+          console.info("发送消息 error : { code : " + data.data.errcode + " }");
+          return;
+        }
+        console.info("发送消息成功");
+      },
+      fail: function (error) {
+        console.info(error.data.errcode);
+
+      }
+    })
+  }
 })

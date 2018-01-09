@@ -1,5 +1,9 @@
 // pages/alarm/addalarm.js
 var dateUtil = require('../../../utils/dateutil.js');
+var jsonUtil = require('../../../utils/jsonutil.js');
+//获取应用实例
+const app = getApp();
+var server_path = "http://localhost:8080/zhiyiweiye1/";
 Page({
   
 
@@ -23,59 +27,11 @@ Page({
     var today = dateUtil.formatDate(new Date());
     this.setData({
       alarmEndDate:today,
-      alarmStartDate:today
+      alarmStartDate:today,
+      medicineName: ""      
     });
-
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-   onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-  
-  onPullDownRefresh: function () {
-
-  }, */
-
-  /**
-   * 页面上拉触底事件的处理函数
-   
-  onReachBottom: function () {
-
-  },*/
-
-  /**
-   * 用户点击右上角分享
-   
-  onShareAppMessage: function () {
-
-  },*/
+  //*****************数据记录function start******** *//
   bindStartDateChange: function (e) {
     this.setData({
       alarmStartDate: e.detail.value
@@ -93,9 +49,16 @@ Page({
   },
   bindNumberChange: function (e) {
     this.setData({
-      num_index: e.detail.value
+      num_index: e.detail.value + 1
     })
   },
+  bindMedName: function (e) {
+    this.setData({
+      medicineName:e.detail.value
+    })
+  },
+  //*****************数据记录function end******** *//
+
   addinfo: function () {
     var _this = this;
     wx.chooseImage({
@@ -105,7 +68,8 @@ Page({
       success: function (res) {
         _this.setData({
           info_image: res.tempFilePaths[0]
-        })
+        });
+        
       }
     });
   },
@@ -119,7 +83,28 @@ Page({
     })
   },
   save: function () {
-    
-    wx.navigateBack({})
+    wx.uploadFile({
+      url: server_path + "viewalarm/add.do",
+      filePath: this.data.info_image,
+      name: 'file',
+      formData: {
+        alarmTime: "2017-12-25 " + this.data.alarmtime + ":00",
+        alarmStartDate: this.data.alarmStartDate + " 00:00:00",
+        alarmEndDate: this.data.alarmEndDate + " 00:00:00",
+        userId: app.globalData.user.userId,
+        statusId: 1,
+        instruction: this.data.num_index,
+        medName: this.data.medicineName
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (user) {
+        
+      },
+      fail: function (failData) {
+        
+      }
+    })
   }
 })
