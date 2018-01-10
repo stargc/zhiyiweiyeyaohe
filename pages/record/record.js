@@ -1,7 +1,7 @@
 // pages/record/record.js
 const app = getApp();
 var jsonUtil = require('../../utils/jsonutil.js');
-var server_path = "http://localhost:8080/zhiyiweiye1/";
+var server_path = app.globalData.server_path;
 Page({
 
   /**

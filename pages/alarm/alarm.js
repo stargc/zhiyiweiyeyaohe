@@ -2,7 +2,7 @@
 var jsonUtil = require('../../utils/jsonutil.js');
 //获取应用实例
 const app = getApp();
-var server_path = "http://localhost:8080/zhiyiweiye1/";
+var server_path = app.globalData.server_path;
 
 Page({
   data: {
@@ -12,8 +12,7 @@ Page({
     hasUserInfo: false,
     alarms: ""
   },
-  gotoAddAlarm: function (event) {
-    console.info(event.target.dataset.alarmID);
+  gotoAddAlarm: function () {
     wx.navigateTo({
       url: "addalarm/addalarm"
     })
@@ -53,21 +52,23 @@ Page({
     }
     
   },
-  onLoad: function () {
+  onShow: function () {
     var _this = this;
-    console.info("alarm onload");
-
+    this.setData({
+      alarms:null
+    });
     wx.showLoading({
       title: '加载中',
       mask: true,
     });
 
-    setTimeout(function(){
+    setTimeout(function () {
       _this.hideLoadingToast();
-    },3000);
-
-
-
+    }, 3000);
+  },
+  onLoad: function () {
+    var _this = this;
+    console.info("alarm onload");
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -102,9 +103,8 @@ Page({
     }
   },
   gotoMedicine: function (event) {
-    console.info(event.target.dataset.alarmID);
     wx.navigateTo({
-      url: 'medicineInfo/medicineInfo?alarmId=' +event.target.dataset.alarmid,
+      url: 'medicineInfo/medicineInfo?medId=' + event.currentTarget.dataset.medid,
     })
   },
   storeUserInfo: function (res) {

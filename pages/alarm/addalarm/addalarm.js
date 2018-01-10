@@ -3,7 +3,7 @@ var dateUtil = require('../../../utils/dateutil.js');
 var jsonUtil = require('../../../utils/jsonutil.js');
 //获取应用实例
 const app = getApp();
-var server_path = "http://localhost:8080/zhiyiweiye1/";
+var server_path = app.globalData.server_path;
 Page({
   
 

@@ -5,28 +5,28 @@
     <view class="line1"></view>
     <view class="info">
       <text class="key">药品名称</text>
-      <text class="value">{{alarmId}}</text>
+      <text class="value">{{medicineInfo.medName}}</text>
     </view>
     <view class="line1"></view>
     <view class="info">
       <text class="key">每次服用量</text>
-      <text class="value">鱼肝油</text>
+      <text class="value">{{medicineInfo.instructions}}</text>
     </view>
     <view class="line1"></view>
     <view class="info">
       <text class="key">使用病状</text>
-      <text class="value">维生素AD缺乏</text>
+      <text class="value">{{medicineInfo.malady}}</text>
     </view>
     <view class="line1"></view>
     <view class="info">
       <text class="med-name">详细信息</text>
-      <image class="med-img" src="../../../images/alarm/medicine.png"></image>
+      <image class="med-img" src="{{server_path}}alarm/getImage?url={{medicineInfo.url}}"></image>
     </view>
   </view>
-  <form bindsubmit='done' report-submit='true'>
+  <form bindsubmit='done' report-submit='true' style="width:100%">
     <button class="done" form-type="submit">已服药</button>
   </form>
-  <form bindsubmit='skip' report-submit='true'>
+  <form bindsubmit='skip' report-submit='true' style="width:100%">
     <button class="goon" form-type="submit">跳过</button>
   </form>
 </view>

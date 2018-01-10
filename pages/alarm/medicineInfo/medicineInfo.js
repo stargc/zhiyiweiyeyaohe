@@ -3,21 +3,37 @@ var dateUtil = require('../../../utils/dateutil.js');
 var jsonUtil = require('../../../utils/jsonutil.js');
 
 const app = getApp();
-var server_path = "http://localhost:8080/zhiyiweiye1/";
+var server_path = app.globalData.server_path;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    server_path: server_path,
+    medicineInfo: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-    console.info(e.alarmId);
+    var _this = this;
+    wx.request({
+      url: server_path + "medicine/findById.do",
+      data: {
+        medId: e.medId
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.info("get medicine data===============");
+        _this.setData({
+          medicineInfo: jsonUtil.stringToJson(res.data).data[0]
+        });
+      }
+    });
   },
 
   /**
@@ -80,11 +96,42 @@ Page({
     }
   },
   done: function(e) {
-    console.info("formID：" + e.detail.formId);
-    this.sendMsg(e.detail.formId);
+    // console.info("formID：" + e.detail.formId);
+    // this.sendMsg(e.detail.formId);
+    wx.request({
+      url: server_path + "viewalarm/updateStatus.do",
+      data: {
+        alarmId: this.data.medicineInfo.alarmId,
+        statusId: 2
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.info("update status===============");
+        wx.navigateBack({
+          
+        });
+      }
+    });
   },
   skip: function(e) {
+    wx.request({
+      url: server_path + "viewalarm/updateStatus.do",
+      data: {
+        alarmId: this.data.medicineInfo.alarmId,
+        statusId: 3
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.info("update status===============");
+        wx.navigateBack({
 
+        });
+      }
+    });
   },
   sendMsg: function (formid) {
     wx.request({
