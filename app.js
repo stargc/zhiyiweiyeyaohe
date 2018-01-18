@@ -1,9 +1,11 @@
 //app.js
 var jsonUtil = require('utils/jsonutil.js');
-var server_path = "http://localhost:8080/MedicineBox/";
+var server_path = "https://www.zhiyiweiye.cn/MedicineBox/";
+// var server_path = "http://localhost:8080/MedicineBox/";
 App({
   globalData: {
-    server_path : "http://localhost:8080/MedicineBox/",
+    server_path: "https://www.zhiyiweiye.cn/MedicineBox/",
+    // server_path: "http://localhost:8080/MedicineBox/",
     userInfo: null,
     user: null,
     openId: null,

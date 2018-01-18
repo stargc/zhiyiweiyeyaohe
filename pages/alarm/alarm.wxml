@@ -15,8 +15,8 @@
       <text class="tx-next">下一个</text>
       <image class="img-next" src="../../images/alarm/alarm_next.png"></image>
     </view>
-    <block wx:for="{{alarms}}">
-      <view class="card" style="margin-top:0;" bindtap='gotoMedicine' data-medid="{{item.medId}}">
+    <block wx:for="{{alarms}}" wx:key="alarmId">
+      <view class="card" style="margin-top:0;" bindtap='gotoMedicine' data-medid="{{item.medId}}" data-alarmId="{{item.alarmId}}">
         <view class="dv-time">
           <text class="time">{{item.alarmTime_show}}</text>
           <text class="fre">{{item.alarmDate_show}}</text>

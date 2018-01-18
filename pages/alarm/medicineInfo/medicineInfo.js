@@ -11,7 +11,9 @@ Page({
    */
   data: {
     server_path: server_path,
-    medicineInfo: null
+    medicineInfo: null,
+    medId:0,
+    alarmId:0
   },
 
   /**
@@ -19,6 +21,10 @@ Page({
    */
   onLoad: function (e) {
     var _this = this;
+    this.setData({
+      medId: e.medId,
+      alarmId: e.alarmId
+    });
     wx.request({
       url: server_path + "medicine/findById.do",
       data: {
@@ -101,7 +107,7 @@ Page({
     wx.request({
       url: server_path + "viewalarm/updateStatus.do",
       data: {
-        alarmId: this.data.medicineInfo.alarmId,
+        alarmId: this.data.alarmId,
         statusId: 2
       },
       header: {
@@ -119,7 +125,7 @@ Page({
     wx.request({
       url: server_path + "viewalarm/updateStatus.do",
       data: {
-        alarmId: this.data.medicineInfo.alarmId,
+        alarmId: this.data.alarmId,
         statusId: 3
       },
       header: {

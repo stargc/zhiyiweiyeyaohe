@@ -104,7 +104,8 @@ Page({
   },
   gotoMedicine: function (event) {
     wx.navigateTo({
-      url: 'medicineInfo/medicineInfo?medId=' + event.currentTarget.dataset.medid,
+      url: 'medicineInfo/medicineInfo?medId=' + event.currentTarget.dataset.medid + 
+            '&alarmId=' + event.currentTarget.dataset.alarmid,
     })
   },
   storeUserInfo: function (res) {

@@ -1,7 +1,7 @@
 <!--pages/record/record.wxml-->
 <view class="container">
 
-  <block wx:for="{{recordData}}">
+  <block wx:for="{{recordData}}" wx:key="recordId">
     <view class="card">
       <text class="date">{{item.alarmDate_show}}</text>
       <view class="line"></view>

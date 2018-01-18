@@ -49,7 +49,7 @@ Page({
   },
   bindNumberChange: function (e) {
     this.setData({
-      num_index: e.detail.value + 1
+      num_index: e.detail.value
     })
   },
   bindMedName: function (e) {
@@ -83,14 +83,24 @@ Page({
     })
   },
   save: function () {
+    if (this.data.info_image == "../../../images/alarm/alarm_extra_info_ch.png"){
+      wx.showModal({
+        title: "添加失败",
+        content: "请添加药品详情图片",
+        showCancel: false,
+        confirmText: "确认"
+      });
+      return;
+    }
+    console.info("add alarm : " + this.data.medicineName);
     wx.uploadFile({
       url: server_path + "viewalarm/add.do",
       filePath: this.data.info_image,
       name: 'file',
       formData: {
         alarmTime: "2017-12-25 " + this.data.alarmtime + ":00",
-        alarmStartDate: this.data.alarmStartDate + " 00:00:00",
-        alarmEndDate: this.data.alarmEndDate + " 00:00:00",
+        startDate: this.data.alarmStartDate + " 00:00:00",
+        endDate: this.data.alarmEndDate + " 00:00:00",
         userId: app.globalData.user.userId,
         statusId: 1,
         instruction: this.data.num_index,
@@ -99,11 +109,14 @@ Page({
       header: {
         'content-type': 'application/json' // 默认值
       },
-      success: function (user) {
-        
+      success: function (result) {
+        console.info(result.data);
+        wx.navigateBack({
+          
+        });
       },
       fail: function (failData) {
-        
+        console.info(failData);
       }
     })
   }
