@@ -25,33 +25,29 @@ App({
         if (res.code) {
           //获取openId
           wx.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session',
+            url: server_path + 'winXinAgent/queryOpenId.do',
             data: {
-              //小程序唯一标识
-              appid: 'wx8723c746ba822cd7',
-              //小程序的 app secret
-              secret: '6c0b8a7c7e01fe5fbe01dc91f9a27bb0',
-              grant_type: 'authorization_code',
-              js_code: res.code
+              loginCode: res.code
             },
             method: 'GET',
             header: { 'content-type': 'application/json' },
-            success: function (openIdRes) {
+            success: function (serverResult) {
+              var openIdRes = jsonUtil.stringToJson(serverResult.data);
               console.info("app getOpenID");
-              console.info("登录成功返回的openId：" + openIdRes.data.openid);
-              _this.globalData.openId = openIdRes.data.openid;
-              _this.globalData.session_key = openIdRes.data.session_key;
+              console.info("登录成功返回的openId：" + openIdRes.openid);
+              _this.globalData.openId = openIdRes.openid;
+              _this.globalData.session_key = openIdRes.session_key;
               wx.setStorage({
                 key: "openId",
-                data: openIdRes.data.openid
+                data: openIdRes.openid
               });
               wx.setStorage({
                 key: "session_key",
-                data: openIdRes.data.session_key
+                data: openIdRes.session_key
               });
               _this.startUpdateAccessToken();
               // 判断openId是否获取成功
-              if (openIdRes.data.openid != null & openIdRes.data.openid != undefined) {
+              if (openIdRes.openid != null & openIdRes.openid != undefined) {
                 wx.getUserInfo({
                   success: function (info) {
                     // 自定义操作
@@ -65,7 +61,7 @@ App({
                         city: info.userInfo.city,
                         userName: info.userInfo.nickName,
                         nickName: info.userInfo.nickName,
-                        openId: openIdRes.data.openid
+                        openId: openIdRes.openid
                       },
                       header: {
                         'content-type': 'application/json' // 默认值
@@ -106,34 +102,29 @@ App({
     var _this = this;
     
     wx.request({
-      url: 'https://api.weixin.qq.com/cgi-bin/token',
-      data: {
-        //小程序唯一标识
-        appid: 'wx8723c746ba822cd7',
-        //小程序的 app secret
-        secret: '6c0b8a7c7e01fe5fbe01dc91f9a27bb0',
-        grant_type: 'client_credential'
-      },
+      url: server_path + 'winXinAgent/queryToken.do',
+      data: {},
       method: 'GET',
       header: { 'content-type': 'application/json' },
-      success: function (data) {
-        if (data.data.access_token == undefined){
-          console.info("error : { code : " + data.data.errcode + ", errmag : " + data.data.errmsg + "}");
+      success: function (resultdata) {
+        var data = jsonUtil.stringToJson(resultdata.data);
+        if (data.access_token == undefined){
+          console.info("error : { code : " + data.errcode + ", errmag : " + data.errmsg + "}");
           setTimeout(function () {
             _this.startUpdateAccessToken();
           }, 1000);
           return;
         }
-        console.info("access_token: " + data.data.access_token);
-        console.info("access_token expires time : " + data.data.expires_in);
+        console.info("access_token: " + data.access_token);
+        console.info("access_token expires time : " + data.expires_in);
         wx.setStorage({
           key: "access_token",
-          data: data.data.access_token
+          data: data.access_token
         });
-        _this.globalData.access_token = data.data.access_token;
+        _this.globalData.access_token = data.access_token;
         setTimeout(function () {
           _this.startUpdateAccessToken();
-        }, (data.data.expires_in-1) * 1000);
+        }, (data.expires_in-1) * 1000);
       },
       fail: function (error) {
         console.info(error);
