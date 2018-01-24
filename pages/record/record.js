@@ -15,21 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this;
-        wx.request({
-          url: server_path + "viewrecord/findAlarmByUser.do",
-          data: {
-            userId: app.globalData.user.userId
-          },
-          header: {
-            'content-type': 'application/json' // 默认值
-          },
-          success: function (res) {
-            _this.setData({
-              recordData: jsonUtil.stringToJson(res.data).data
-            });
-          }
-        }) 
+    
   },
 
   /**
@@ -43,7 +29,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var _this = this;
+    wx.request({
+      url: server_path + "viewrecord/findAlarmByUser.do",
+      data: {
+        userId: app.globalData.user.userId
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        _this.setData({
+          recordData: jsonUtil.stringToJson(res.data).data
+        });
+      }
+    }) 
   },
 
   /**
