@@ -10,7 +10,7 @@
     <view class="line1"></view>
     <view class="info">
       <text class="key">每次服用量</text>
-      <text class="value">{{medicineInfo.instructions}}</text>
+      <text class="value">{{dosage}}</text>
     </view>
     <view class="line1"></view>
     <view class="info">

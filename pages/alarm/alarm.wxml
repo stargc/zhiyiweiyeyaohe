@@ -16,7 +16,8 @@
       <image class="img-next" src="../../images/alarm/alarm_next.png"></image>
     </view>
     <block wx:for="{{alarms}}" wx:key="alarmId">
-      <view class="card" style="margin-top:0;" bindtap='gotoMedicine' data-medid="{{item.medId}}" data-alarmId="{{item.alarmId}}">
+      <view class="card" style="margin-top:0;" bindtap='gotoMedicine' data-medid="{{item.medId}}" 
+        data-alarmId="{{item.alarmId}}" data-dosage="{{item.dosage}}">
         <view class="dv-time">
           <text class="time">{{item.alarmTime_show}}</text>
           <text class="fre">{{item.alarmDate_show}}</text>
@@ -26,7 +27,7 @@
           <!--  <image class="med-img-bg" src='../../images/alarm/alarm_extra_info.png'></image> -->
           <image class="med-img" src="{{server_path}}alarm/getImage?url={{item.url}}"></image>
           <text class="med-name">{{item.medName}}</text>
-          <text class="med-fre">x{{item.instruction}}</text>
+          <text class="med-fre">x{{item.dosage}}</text>
         </view>
       </view>
     </block>

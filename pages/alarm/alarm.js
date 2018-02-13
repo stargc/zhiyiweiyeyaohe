@@ -105,7 +105,8 @@ Page({
   gotoMedicine: function (event) {
     wx.navigateTo({
       url: 'medicineInfo/medicineInfo?medId=' + event.currentTarget.dataset.medid + 
-            '&alarmId=' + event.currentTarget.dataset.alarmid,
+            '&alarmId=' + event.currentTarget.dataset.alarmid +
+            '&dosage=' + event.currentTarget.dataset.dosage,
     })
   },
   storeUserInfo: function (res) {
@@ -123,14 +124,14 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (user) {
-        if (jsonUtil.stringToJson(user.data).code == 0) {
-          var userData = jsonUtil.stringToJson(user.data).data;
+        if (user.data.code == 0) {
+          var userData = user.data.data;
           console.info("用户注册成功");
           wx.setStorage({
             key: "user",
             data: userData
           });
-          app.globalData.user = userData[0];
+          app.globalData.user = userData;
         }
       },
       fail: function (failData) {
@@ -150,10 +151,13 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.info("alarm getalarm data===============");
+        console.info("alarm getalarm data result " + res.data.code);
         _this.setData({
-          alarms: jsonUtil.stringToJson(res.data).data
+          alarms: res.data.data
         });
+      },
+      fail: function (error) {
+        console.info("alarm getalarm data result error: " + error);
       }
     })
   }

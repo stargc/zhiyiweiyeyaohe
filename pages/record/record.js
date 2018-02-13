@@ -39,8 +39,9 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
+        console.info("alarm get record data result " + res.data);
         _this.setData({
-          recordData: jsonUtil.stringToJson(res.data).data
+          recordData: res.data.data
         });
       }
     }) 

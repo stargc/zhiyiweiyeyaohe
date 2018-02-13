@@ -82,7 +82,27 @@ Page({
       medicine_items: _item
     })
   },
-  save: function () {
+  save: function (e) {
+    try {
+      //记录一个fromID
+      wx.request({
+        url: server_path + "SendMessageParm/addParm.do",
+        data: {
+          openId: app.globalData.openId,
+          userId: app.globalData.user.userId,
+          formId: e.detail.formId,
+          type: "FAMB"
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: function (res) {
+          console.info("add user fromId result: " + res);
+        }
+      });
+    } catch (err) {
+      console.info(err);
+    }
     if (this.data.info_image == "../../../images/alarm/alarm_extra_info_ch.png"){
       wx.showModal({
         title: "添加失败",
@@ -103,7 +123,7 @@ Page({
         endDate: this.data.alarmEndDate + " 00:00:00",
         userId: app.globalData.user.userId,
         statusId: 1,
-        instruction: this.data.num_index,
+        dosage: parseInt(this.data.num_index) + 1,
         medName: this.data.medicineName
       },
       header: {

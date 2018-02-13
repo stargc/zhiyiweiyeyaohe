@@ -13,7 +13,8 @@ Page({
     server_path: server_path,
     medicineInfo: null,
     medId:0,
-    alarmId:0
+    alarmId:0,
+    dosage:1
   },
 
   /**
@@ -23,7 +24,8 @@ Page({
     var _this = this;
     this.setData({
       medId: e.medId,
-      alarmId: e.alarmId
+      alarmId: e.alarmId,
+      dosage: e.dosage
     });
     wx.request({
       url: server_path + "medicine/findById.do",
@@ -34,9 +36,9 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.info("get medicine data===============");
+        console.info("get " + e.medId + " medicine data：" + res.data.code + " ,msg: " + res.data.msg);
         _this.setData({
-          medicineInfo: jsonUtil.stringToJson(res.data).data[0]
+          medicineInfo: res.data.data
         });
       }
     });
@@ -102,8 +104,6 @@ Page({
     }
   },
   done: function(e) {
-    // console.info("formID：" + e.detail.formId);
-    // this.sendMsg(e.detail.formId);
     wx.request({
       url: server_path + "viewalarm/updateStatus.do",
       data: {
@@ -114,12 +114,30 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.info("update status===============");
-        wx.navigateBack({
-          
-        });
+        console.info("update status result: " + res);
+        if (res.data.code == 0){
+          wx.navigateBack({
+
+          });
+        }
       }
-    });
+     });
+    //记录一个fromID
+     wx.request({
+       url: server_path + "SendMessageParm/addParm.do",
+       data: {
+         openId: app.globalData.openId,
+         userId: app.globalData.user.userId,
+         formId: e.detail.formId,
+         type: "FEMB"
+       },
+       header: {
+         'content-type': 'application/json' // 默认值
+       },
+       success: function (res) {
+         console.info("add user fromId result: " + res);
+       }
+     });
   },
   skip: function(e) {
     wx.request({
@@ -132,10 +150,28 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.info("update status===============");
-        wx.navigateBack({
+        console.info("update status result: " + res);
+        if (res.data.code == 0) {
+          wx.navigateBack({
 
-        });
+          });
+        }
+      }
+    });
+    //记录一个fromID
+    wx.request({
+      url: server_path + "SendMessageParm/addParm.do",
+      data: {
+        openId: app.globalData.openId,
+        userId: app.globalData.user.userId,
+        formId: e.detail.formId,
+        type: "FSMB"
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.info("add user fromId result: " + res);
       }
     });
   },

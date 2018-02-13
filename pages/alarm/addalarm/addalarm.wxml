@@ -34,5 +34,7 @@
     </view>
     <button class="add-med" bindtap='addMedicine'>添加一种新药品</button>
   </view>
-  <button class="save" bindtap='save'>保存</button>
+  <form bindsubmit='save' report-submit='true' style="width:100%">
+    <button class="save" form-type="submit">保存</button>
+  </form>
 </view>
