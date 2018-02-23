@@ -1,11 +1,11 @@
 //app.js
 var jsonUtil = require('utils/jsonutil.js');
-// var server_path = "https://www.zhiyiweiye.cn/MedicineBox/";
-var server_path = "http://localhost:7080/MedicineBox/";
+var server_path = "https://www.zhiyiweiye.cn/MedicineBox/";
+// var server_path = "http://localhost:7080/MedicineBox/";
 App({
   globalData: {
-    // server_path: "https://www.zhiyiweiye.cn/MedicineBox/",
-    server_path: "http://localhost:7080/MedicineBox/",
+    server_path: "https://www.zhiyiweiye.cn/MedicineBox/",
+    // server_path: "http://localhost:7080/MedicineBox/",
     userInfo: null,//微信用戶信息
     user: null,//后台服务用户信息:userId,userName
     openId: null,
